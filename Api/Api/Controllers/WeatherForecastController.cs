@@ -11,10 +11,7 @@ namespace Api.Controllers
     [Route("[controller]")]
     public class GroupController : ControllerBase
     {
-        private static readonly string[] Summaries = new[]
-        {
-            "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
-        };
+      
 
         private readonly ILogger<GroupController> _logger;
 
@@ -28,6 +25,11 @@ namespace Api.Controllers
         {
             return new List<Group>();
         }
+        [HttpGet("{id}")]
+        public Group Get(Guid id)
+        {
+            return new Group { };
+        }
         [HttpGet("filter")]
         public IEnumerable<Group> Filter(FilterModel model)
         {
@@ -37,6 +39,16 @@ namespace Api.Controllers
         public IEnumerable<Group> Add(Group model)
         {
             return new List<Group>();
+        }
+        [HttpPost("{id}/add-message")]
+        public IActionResult AddMessage(Guid id,string message)
+        {
+            return Ok();
+        }
+        [HttpDelete("{id}/{message}/delete-message")]
+        public IActionResult DeleteMessage(Guid id, string message)
+        {
+            return Ok();
         }
         [HttpPut()]
         public IEnumerable<Group> Edit(Group model)
@@ -48,6 +60,7 @@ namespace Api.Controllers
         {
             return Ok();
         }
+        
         [HttpPost("{id}/add-member")]
         public IEnumerable<Group> AddMember(Guid id, User model)
         {
